@@ -52,4 +52,5 @@ Case Study Builder: Add, edit, or remove detailed project cards, including techn
 🚀 Deployment & Usage
 This project utilizes a Serverless / Build-less Architecture.
 To deploy or run locally, simply open the portfolio-max.html file in any modern web browser. No npm install, webpack, or build processes are required.
-Designed and engineered for performance, aesthetics, and ease of management.
+
+** Designed and engineered for performance, aesthetics, and ease of management by M. Junaid Abid **
