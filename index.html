@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Junaid Abid - Portfolio</title>
+    <title>Muhammad Junaid Abid - Portfolio (Maximized)</title>
     <meta name="description" content="Portfolio of Muhammad Junaid Abid - Project & Product Manager">
 
     <!-- External Libraries -->
@@ -59,6 +59,7 @@
         
         *, *::before, *::after {
             cursor: none !important;
+            box-sizing: border-box;
         }
         
         html { scroll-behavior: smooth; }
@@ -69,6 +70,7 @@
             color: white; 
             overflow-x: hidden;
             font-family: 'Inter', sans-serif;
+            min-height: 100vh;
         }
 
         /* FLUID LAYER CSS */
@@ -127,6 +129,12 @@
             background: rgba(var(--primary-rgb), 0.15);
             border-width: 3px;
             opacity: 1;
+        }
+        #cursor-outline.resize-cursor {
+            width: 30px; height: 30px;
+            border-color: var(--secondary-color);
+            border-radius: 5px;
+            background: rgba(var(--secondary-rgb), 0.2);
         }
         #cursor-outline.clicking {
             width: 35px; height: 35px;
@@ -198,7 +206,7 @@
         }
 
         /* Media Editable */
-        .media-editable { position: relative; overflow: hidden; border-radius: 12px; }
+        .media-editable { position: relative; overflow: visible; border-radius: 12px; }
         .media-editable:hover .media-overlay { opacity: 1; }
         .media-overlay {
             position: absolute;
@@ -211,6 +219,7 @@
             opacity: 0;
             transition: opacity 0.3s ease;
             border-radius: inherit;
+            z-index: 30;
         }
         .media-btn {
             width: 44px; height: 44px;
@@ -221,10 +230,77 @@
             font-size: 18px;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             border: 2px solid rgba(255,255,255,0.2);
+            cursor: pointer !important;
         }
         .media-btn:hover {
             transform: scale(1.2) rotate(5deg);
             box-shadow: 0 0 25px currentColor;
+        }
+
+        /* DRAGGABLE RESIZABLE CANVAS ITEMS */
+        .draggable-canvas-container {
+            position: relative;
+            width: 100%;
+            min-height: 200px;
+            overflow: hidden;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+        }
+
+        .draggable-item-wrapper {
+            position: absolute;
+            user-select: none;
+            cursor: grab !important;
+            z-index: 10;
+        }
+        .draggable-item-wrapper:active {
+            cursor: grabbing !important;
+        }
+        .draggable-item-wrapper.selected {
+            z-index: 20;
+            outline: 2px dashed var(--primary-color);
+        }
+
+        .resize-handle {
+            width: 12px;
+            height: 12px;
+            background: var(--secondary-color);
+            border: 2px solid white;
+            position: absolute;
+            bottom: -6px;
+            right: -6px;
+            cursor: se-resize !important;
+            border-radius: 50%;
+            z-index: 30;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .draggable-item-wrapper:hover .resize-handle,
+        .draggable-item-wrapper.selected .resize-handle {
+            opacity: 1;
+        }
+
+        .custom-tooltip {
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-secondary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: all 0.3s;
+            pointer-events: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .draggable-item-wrapper:hover .custom-tooltip {
+            opacity: 1;
+            bottom: 120%;
         }
 
         /* Text Glow */
@@ -340,6 +416,7 @@
             font-size: 24px;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 5px 25px rgba(0,0,0,0.3), 0 0 30px rgba(var(--primary-rgb), 0.2);
+            cursor: pointer !important;
         }
 
         .settings-btn:hover {
@@ -473,6 +550,7 @@
             text-align: center;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             background: rgba(var(--primary-rgb), 0.03);
+            cursor: pointer !important;
         }
         .upload-zone:hover, .upload-zone.dragover {
             border-color: var(--primary-color);
@@ -546,6 +624,7 @@
             font-weight: 700;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             background: rgba(var(--primary-rgb), 0.05);
+            cursor: pointer !important;
         }
         .add-btn:hover {
             border-style: solid;
@@ -640,6 +719,7 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             position: relative;
             overflow: hidden;
+            cursor: pointer !important;
         }
         .fab-btn::before {
             content: '';
@@ -689,6 +769,7 @@
             border: 3px solid transparent;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
+            cursor: pointer !important;
         }
         .color-swatch:hover, .color-swatch.active {
             transform: scale(1.25);
@@ -753,6 +834,7 @@
             color: white;
             position: relative;
             z-index: 10;
+            cursor: pointer !important;
         }
         .social-link:hover {
             background: var(--primary-color);
@@ -809,6 +891,7 @@
         .btn-electric {
             background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
             transition: all 0.3s;
+            cursor: pointer !important;
         }
         .btn-electric:hover { 
             box-shadow: 0 0 20px var(--primary-color); 
@@ -824,6 +907,7 @@
             text-decoration: none;
             position: relative;
             z-index: 10;
+            cursor: pointer !important;
         }
         .social-icon-btn:hover {
             transform: translateY(-5px) scale(1.1);
@@ -842,6 +926,7 @@
             color: #94a3b8;
             border-bottom: 2px solid transparent;
             transition: all 0.3s;
+            cursor: pointer !important;
         }
         .tab-btn:hover { color: white; }
         .tab-btn.active {
@@ -929,6 +1014,7 @@
 
     <script type="text/babel">
         // --- FLUID ENGINE CLASSES ---
+        // (Engine classes preserved verbatim to ensure stability of existing visual effects)
         class PointerPrototype { constructor() { this.id = -1; this.texcoordX = 0; this.texcoordY = 0; this.prevTexcoordX = 0; this.prevTexcoordY = 0; this.deltaX = 0; this.deltaY = 0; this.down = false; this.moved = false; this.color = {r:0,g:0,b:0}; } }
         
         class Program {
@@ -1214,13 +1300,13 @@
             return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : '6, 182, 212';
         };
         
-        // Helper for Fluid Engine color (0-1 range)
         const hexToRgbObj = (hex) => {
             const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
             return result ? { r: parseInt(result[1], 16)/255, g: parseInt(result[2], 16)/255, b: parseInt(result[3], 16)/255 } : { r:0,g:0,b:0 };
         };
 
         // === INITIAL DATA ===
+        // Extended with new structures for positioning and experience gallery
         const initialData = {
             siteTitle: "Muhammad Junaid Abid - Portfolio",
             navBrand: { first: "Junaid", second: "Abid" },
@@ -1251,11 +1337,11 @@
                 contactQuote: "If you need someone who can debug a circuit, manage a product roadmap, and craft a business strategy, all before lunch - let's talk."
             },
             experience: [
-                { id: 1, role: "Project Manager", company: "EMIRAT AG", location: "Munich", period: "2023 - 2024", desc: "Led 4-member team, accelerating delivery by 25% via sprint optimizations. Added €150K+ revenue pipeline via client negotiations. Built first-ever Notion documentation system.", highlights: ["25% faster delivery", "€150K+ pipeline", "Notion system"] },
-                { id: 2, role: "Business Development Manager", company: "NAOTILUS GmbH", location: "Munich", period: "2022 - 2023", desc: "Designed SaaS business model for EU no-code energy platforms. Secured €500K+ funding. Transformed thesis into funded product with 80% accuracy.", highlights: ["€500K+ funding", "SaaS model", "80% accuracy"] },
-                { id: 3, role: "Business Analyst", company: "MBI Business Innovation", location: "Munich", period: "2019 - 2020", desc: "Launched 'InnoTalent Germany' HR platform. Optimized product-market fit through persona-driven development. Secured strategic partnerships.", highlights: ["HR platform launch", "Strategic partnerships"] },
-                { id: 4, role: "Requirements Engineer", company: "Infineon Technologies", location: "Munich", period: "2018 - 2019", desc: "Managed RDDF lifecycle using Confluence & JIRA. Built workflows to accelerate publishing. Reduced documentation release time by 30%.", highlights: ["30% time reduction", "JIRA workflows"] },
-                { id: 5, role: "QA/QC Engineer", company: "Advance Vision", location: "Saudi Arabia", period: "2014 - 2016", desc: "Managed 75+ workers on mega energy projects. Cut downtime by 15%. Automated workflows via Excel/Word. Delivered 100% error-free inspection logs.", highlights: ["75+ team", "15% downtime cut", "100% accuracy"] }
+                { id: 1, role: "Project Manager", company: "EMIRAT AG", location: "Munich", period: "2023 - 2024", desc: "Led 4-member team, accelerating delivery by 25% via sprint optimizations. Added €150K+ revenue pipeline via client negotiations. Built first-ever Notion documentation system.", highlights: ["25% faster delivery", "€150K+ pipeline", "Notion system"], gallery: [] },
+                { id: 2, role: "Business Development Manager", company: "NAOTILUS GmbH", location: "Munich", period: "2022 - 2023", desc: "Designed SaaS business model for EU no-code energy platforms. Secured €500K+ funding. Transformed thesis into funded product with 80% accuracy.", highlights: ["€500K+ funding", "SaaS model", "80% accuracy"], gallery: [] },
+                { id: 3, role: "Business Analyst", company: "MBI Business Innovation", location: "Munich", period: "2019 - 2020", desc: "Launched 'InnoTalent Germany' HR platform. Optimized product-market fit through persona-driven development. Secured strategic partnerships.", highlights: ["HR platform launch", "Strategic partnerships"], gallery: [] },
+                { id: 4, role: "Requirements Engineer", company: "Infineon Technologies", location: "Munich", period: "2018 - 2019", desc: "Managed RDDF lifecycle using Confluence & JIRA. Built workflows to accelerate publishing. Reduced documentation release time by 30%.", highlights: ["30% time reduction", "JIRA workflows"], gallery: [] },
+                { id: 5, role: "QA/QC Engineer", company: "Advance Vision", location: "Saudi Arabia", period: "2014 - 2016", desc: "Managed 75+ workers on mega energy projects. Cut downtime by 15%. Automated workflows via Excel/Word. Delivered 100% error-free inspection logs.", highlights: ["75+ team", "15% downtime cut", "100% accuracy"], gallery: [] }
             ],
             projects: [
                 { id: 1, title: "No-Code Digital Twin Platform", shortDesc: "SaaS platform digitizing asset management in district heat networks.", longDesc: "A comprehensive SaaS platform designed to digitize and optimize asset management in district heating networks. This EXIST-funded project leverages cutting-edge no-code technology.", company: "NAOTILUS GmbH", year: "2023", link: "", skills: ["Product Management", "Agile", "Business Development", "UX Design"], tools: ["Figma", "JIRA", "Confluence", "Python", "AWS"], images: ["https://images.unsplash.com/photo-1518770660439-4636190af475?w=600", "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600", "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600"], videos: [], pdfs: [] },
@@ -1265,19 +1351,110 @@
             ],
             skills: ["JIRA", "Trello", "Asana", "Notion", "Confluence", "Figma", "Miro", "PowerBI", "Tableau", "Python", "Zapier", "ChatGPT", "Agile/Scrum", "AutoCAD"],
             socialLinks: [
-                { id: 1, icon: "fa-brands fa-linkedin-in", url: "https://linkedin.com", label: "LinkedIn" },
-                { id: 2, icon: "fa-brands fa-github", url: "https://github.com", label: "GitHub" },
-                { id: 3, icon: "fa-brands fa-behance", url: "https://behance.net", label: "Behance" },
-                { id: 4, icon: "fa-brands fa-xing", url: "https://xing.com", label: "Xing" }
+                { id: 1, icon: "fa-brands fa-linkedin-in", url: "https://linkedin.com", label: "LinkedIn", x: 10, y: 30, scale: 1, color: "#ffffff" },
+                { id: 2, icon: "fa-brands fa-github", url: "https://github.com", label: "GitHub", x: 30, y: 30, scale: 1, color: "#ffffff" },
+                { id: 3, icon: "fa-brands fa-behance", url: "https://behance.net", label: "Behance", x: 50, y: 30, scale: 1, color: "#ffffff" },
+                { id: 4, icon: "fa-brands fa-xing", url: "https://xing.com", label: "Xing", x: 70, y: 30, scale: 1, color: "#ffffff" }
             ]
         };
 
         const ADMIN_EMAIL = "mj.abid@outlook.com";
         const ADMIN_PASS = "@!Oh@26161";
-
         const presetColors = ['#06b6d4', '#a855f7', '#10b981', '#f59e0b', '#ef4444', '#ec4899', '#6366f1', '#14b8a6', '#8b5cf6', '#f97316'];
 
-        // === ADVANCED SATURN SCENE (Asset Integration) ===
+        // === DRAG AND RESIZE HOOK & COMPONENT ===
+        const useDraggable = (initialX, initialY, initialScale, onUpdate, isEnabled) => {
+            const [pos, setPos] = useState({ x: initialX || 0, y: initialY || 0 });
+            const [scale, setScale] = useState(initialScale || 1);
+            const [isDragging, setIsDragging] = useState(false);
+            const [isResizing, setIsResizing] = useState(false);
+            
+            const ref = useRef(null);
+            const startRef = useRef({ x: 0, y: 0, w: 0, h: 0 });
+
+            useEffect(() => {
+                if (!isEnabled) return;
+
+                const handleMouseMove = (e) => {
+                    if (isDragging) {
+                        // Calculate percentage based on parent container
+                        const parent = ref.current.parentElement.getBoundingClientRect();
+                        const dx = e.clientX - startRef.current.mx;
+                        const dy = e.clientY - startRef.current.my;
+                        
+                        const percentX = Math.min(Math.max(0, startRef.current.x + (dx / parent.width) * 100), 100);
+                        const percentY = Math.min(Math.max(0, startRef.current.y + (dy / parent.height) * 100), 100);
+                        
+                        setPos({ x: percentX, y: percentY });
+                    } else if (isResizing) {
+                        const dx = e.clientX - startRef.current.mx;
+                        // Simple uniform scaling based on drag distance
+                        const newScale = Math.max(0.5, Math.min(3, startRef.current.s + (dx * 0.01)));
+                        setScale(newScale);
+                    }
+                };
+
+                const handleMouseUp = () => {
+                    if (isDragging || isResizing) {
+                        setIsDragging(false);
+                        setIsResizing(false);
+                        onUpdate(pos.x, pos.y, scale);
+                    }
+                };
+
+                window.addEventListener('mousemove', handleMouseMove);
+                window.addEventListener('mouseup', handleMouseUp);
+                return () => {
+                    window.removeEventListener('mousemove', handleMouseMove);
+                    window.removeEventListener('mouseup', handleMouseUp);
+                };
+            }, [isDragging, isResizing, pos, scale, isEnabled]);
+
+            const startDrag = (e) => {
+                if (!isEnabled) return;
+                e.preventDefault();
+                e.stopPropagation();
+                setIsDragging(true);
+                startRef.current = { mx: e.clientX, my: e.clientY, x: pos.x, y: pos.y };
+            };
+
+            const startResize = (e) => {
+                if (!isEnabled) return;
+                e.preventDefault();
+                e.stopPropagation();
+                setIsResizing(true);
+                startRef.current = { mx: e.clientX, my: e.clientY, s: scale };
+            };
+
+            return { ref, pos, scale, startDrag, startResize, isDragging, isResizing };
+        };
+
+        const DraggableItem = ({ children, x, y, s, onUpdate, isAdmin, tooltip, className }) => {
+            const { ref, pos, scale, startDrag, startResize, isDragging, isResizing } = useDraggable(x, y, s, onUpdate, isAdmin);
+
+            const style = {
+                left: `${pos.x}%`,
+                top: `${pos.y}%`,
+                transform: `translate(-50%, -50%) scale(${scale})`,
+            };
+
+            return (
+                <div 
+                    ref={ref}
+                    className={`draggable-item-wrapper ${isAdmin ? 'admin-mode' : ''} ${isDragging ? 'grabbing' : ''} ${className || ''}`}
+                    style={style}
+                    onMouseDown={isAdmin ? startDrag : undefined}
+                >
+                    {children}
+                    {!isAdmin && tooltip && <div className="custom-tooltip">{tooltip}</div>}
+                    {isAdmin && (
+                        <div className="resize-handle" onMouseDown={startResize} title="Drag to scale" />
+                    )}
+                </div>
+            );
+        };
+
+        // === ADVANCED SATURN SCENE ===
         const AdvancedSaturn = ({ theme }) => {
             const mountRef = useRef(null);
             const themeRef = useRef(theme);
@@ -1286,13 +1463,11 @@
 
             useEffect(() => { themeRef.current = theme; }, [theme]);
 
-            // Helper: Random Vector
             const getRandVec = () => {
                 const v = new THREE.Vector3(Math.random()-0.5, Math.random()-0.5, Math.random()-0.5);
                 return v.normalize();
             };
 
-            // Helper: Create Lightning Bolt
             const createBolt = (start, end, segmentCount, offsetAmount, colHex, thick) => {
                 const points = [];
                 points.push(start);
@@ -1322,10 +1497,9 @@
                 if(!mountRef.current || !window.THREE) return;
                 const mount = mountRef.current;
                 const width = mount.clientWidth;
-                const height = 600; // Matches parent container
+                const height = 600; 
 
                 const scene = new THREE.Scene();
-                
                 const camera = new THREE.PerspectiveCamera(45, width/height, 0.1, 1000);
                 camera.position.z = 25;
                 
@@ -1336,17 +1510,14 @@
                 renderer.toneMappingExposure = 1.2;
                 mount.appendChild(renderer.domElement);
 
-                // Planet Setup
                 const planetMat = new THREE.MeshStandardMaterial({ color: theme.pBase, emissive: theme.pGlow, emissiveIntensity: 0.8, roughness: theme.pRough, metalness: theme.pMetal });
                 const planet = new THREE.Mesh(new THREE.SphereGeometry(3.5, 64, 64), planetMat);
                 const pGroup = new THREE.Group(); 
                 pGroup.add(planet); 
-                
                 const rGroup = new THREE.Group(); 
                 pGroup.add(rGroup); 
                 scene.add(pGroup);
 
-                // Neutron Core Setup
                 const neutronGroup = new THREE.Group();
                 neutronGroup.add(new THREE.Mesh(new THREE.SphereGeometry(1.2, 32, 32), new THREE.MeshBasicMaterial({ color: 0xffffff, toneMapped: false })));
                 neutronGroup.add(new THREE.Mesh(new THREE.SphereGeometry(2.0, 32, 32), new THREE.MeshBasicMaterial({ color: 0x00f0ff, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending, side: THREE.BackSide })));
@@ -1356,17 +1527,14 @@
                 const botBeam = new THREE.Mesh(beamGeo, beamMat); botBeam.rotation.x = Math.PI; botBeam.position.y = -20; neutronGroup.add(botBeam);
                 scene.add(neutronGroup);
 
-                // Neptune Setup
                 const neptuneGroup = new THREE.Group();
                 neptuneGroup.add(new THREE.Mesh(new THREE.SphereGeometry(3.5, 64, 64), new THREE.MeshLambertMaterial({ color: theme.neptuneColA })));
                 neptuneGroup.add(new THREE.Mesh(new THREE.SphereGeometry(3.6, 64, 64), new THREE.MeshLambertMaterial({ color: theme.neptuneColB, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending, side: THREE.DoubleSide })));
                 scene.add(neptuneGroup);
 
-                // Lightning Group
                 const lGroup = new THREE.Group(); 
                 scene.add(lGroup); 
 
-                // Particles
                 const createParticles = (count, size, col, spread) => {
                     const geo = new THREE.BufferGeometry();
                     const pos = new Float32Array(count * 3);
@@ -1379,20 +1547,17 @@
                 const nebula = createParticles(200, 4.0, theme.nebColor, 80); scene.add(nebula);
                 const sGroup = new THREE.Group(); scene.add(sGroup);
 
-                // Lights
                 const dirLight = new THREE.DirectionalLight(0xffffff, 2.0); dirLight.position.set(10, 10, 20); scene.add(dirLight);
                 const blueLight = new THREE.PointLight(0x00f0ff, 1, 50); blueLight.position.set(-10, -5, 10); scene.add(blueLight);
                 scene.add(new THREE.AmbientLight(0x404040, 0.5));
 
                 objs.current = { scene, camera, renderer, planet, rGroup, stars, asteroids, nebula, sGroup, neutronGroup, neptuneGroup, lGroup, pGroup };
 
-                // Input Handling
                 const onDown = e => { if(mount.contains(e.target)) { state.current.drag=true; state.current.prev={x:e.clientX, y:e.clientY}; } };
                 const onUp = () => state.current.drag = false;
                 const onMove = e => { if(state.current.drag) { state.current.vel.y += (e.clientX - state.current.prev.x) * 0.0005; state.current.vel.x += (e.clientY - state.current.prev.y) * 0.0005; state.current.prev = {x: e.clientX, y: e.clientY}; } };
                 window.addEventListener('mousedown', onDown); window.addEventListener('mouseup', onUp); window.addEventListener('mousemove', onMove);
 
-                // Animation Loop
                 let animationId;
                 const animate = () => {
                     animationId = requestAnimationFrame(animate);
@@ -1405,7 +1570,6 @@
                     }
                     pGroup.rotation.y += state.current.vel.y; pGroup.rotation.x += state.current.vel.x;
 
-                    // Rings
                     if(rGroup.children.length === 3) {
                         if(currentTheme.gyroPattern) {
                             rGroup.children[0].rotation.z += 0.01 * spd; rGroup.children[1].rotation.z -= 0.008 * spd; rGroup.children[2].rotation.z += 0.012 * spd;
@@ -1425,7 +1589,6 @@
                     }
                     sGroup.children.forEach(c => { c.translateZ(2); c.material.opacity-=0.05; if(c.material.opacity<=0) { sGroup.remove(c); c.geometry.dispose(); c.material.dispose(); } });
 
-                    // Lightning - Realtime update via ref
                     if(currentTheme.lightning) {
                         const cA = new THREE.Color(currentTheme.lightningColA);
                         const cB = new THREE.Color(currentTheme.lightningColB);
@@ -1454,16 +1617,14 @@
                 };
                 animate();
 
-                // Cleanup
                 return () => {
                     cancelAnimationFrame(animationId);
                     window.removeEventListener('mousedown', onDown); window.removeEventListener('mouseup', onUp); window.removeEventListener('mousemove', onMove);
                     if(mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
                     renderer.dispose();
                 };
-            }, []); // Init only once
+            }, []);
 
-            // Update materials on theme change
             useEffect(() => {
                 const { planet, rGroup, stars, asteroids, nebula, sGroup, neutronGroup, neptuneGroup, lGroup } = objs.current;
                 if(!planet) return;
@@ -1477,7 +1638,6 @@
                 else if (theme.neptune) { planet.visible = false; neutronGroup.visible = false; neptuneGroup.visible = true; } 
                 else { planet.visible = true; neutronGroup.visible = false; neptuneGroup.visible = false; }
 
-                // Clear lightning immediately if turned off
                 if(!theme.lightning) { while(lGroup.children.length) { const c = lGroup.children[0]; lGroup.remove(c); if(c.geometry) c.geometry.dispose(); if(c.material) c.material.dispose(); } }
 
                 while(rGroup.children.length) { const m = rGroup.children[0]; m.geometry.dispose(); m.material.dispose(); rGroup.remove(m); }
@@ -1630,16 +1790,26 @@
         };
 
         // === MODALS ===
-        const MediaManagerModal = ({ isOpen, onClose, projectId, mediaType, data, setData, theme }) => {
+        const MediaManagerModal = ({ isOpen, onClose, targetId, targetType, mediaType, data, setData, theme }) => {
             const [urlInput, setUrlInput] = useState('');
             const [dragOver, setDragOver] = useState(false);
             const fileInputRef = useRef(null);
 
             if (!isOpen) return null;
-            const project = data.projects.find(p => p.id === projectId);
-            if (!project) return null;
 
-            const mediaArray = project[mediaType] || [];
+            // Handle Project media OR Experience gallery
+            const isProject = targetType === 'project';
+            const collection = isProject ? data.projects : data.experience;
+            const item = collection.find(p => p.id === targetId);
+            if (!item) return null;
+
+            // Determine array key based on mediaType and target
+            // For projects: 'images', 'videos', 'pdfs'
+            // For experience: 'gallery' (treated as images)
+            let arrayKey = mediaType;
+            if (!isProject && mediaType === 'images') arrayKey = 'gallery';
+
+            const mediaArray = item[arrayKey] || [];
 
             const handleFileUpload = (files) => {
                 Array.from(files).forEach(file => {
@@ -1656,11 +1826,13 @@
             const addMedia = (url, fileName = '') => {
                 if (!url?.trim()) return;
                 const newData = { ...data };
-                const idx = newData.projects.findIndex(p => p.id === projectId);
+                const idx = collection.findIndex(p => p.id === targetId);
+                const targetCollection = isProject ? newData.projects : newData.experience;
+
                 if (mediaType === 'pdfs') {
-                    newData.projects[idx].pdfs = [...(newData.projects[idx].pdfs || []), { url, name: fileName || 'Document.pdf' }];
+                    targetCollection[idx].pdfs = [...(targetCollection[idx].pdfs || []), { url, name: fileName || 'Document.pdf' }];
                 } else {
-                    newData.projects[idx][mediaType] = [...(newData.projects[idx][mediaType] || []), url];
+                    targetCollection[idx][arrayKey] = [...(targetCollection[idx][arrayKey] || []), url];
                 }
                 setData(newData);
                 localStorage.setItem('portfolioData', JSON.stringify(newData));
@@ -1670,8 +1842,9 @@
 
             const removeMedia = (index) => {
                 const newData = { ...data };
-                const idx = newData.projects.findIndex(p => p.id === projectId);
-                newData.projects[idx][mediaType] = newData.projects[idx][mediaType].filter((_, i) => i !== index);
+                const idx = collection.findIndex(p => p.id === targetId);
+                const targetCollection = isProject ? newData.projects : newData.experience;
+                targetCollection[idx][arrayKey] = targetCollection[idx][arrayKey].filter((_, i) => i !== index);
                 setData(newData);
                 localStorage.setItem('portfolioData', JSON.stringify(newData));
                 showToast('Removed!', 'info');
@@ -1713,19 +1886,21 @@
 
                         <div className="media-grid">
                             {mediaArray.map((item, index) => (
-                                <div key={index} className="media-item group">
-                                    {mediaType === 'images' && <img src={item} alt="" />}
-                                    {mediaType === 'videos' && (item.includes('youtube') || item.includes('vimeo') ? <iframe src={item} className="w-full h-full" /> : <video src={item} />)}
-                                    {mediaType === 'pdfs' && (
-                                        <div className="w-full h-full bg-slate-700 flex flex-col items-center justify-center">
-                                            <span className="text-4xl">📄</span>
-                                            <span className="text-xs text-slate-300 mt-2 px-2 truncate w-full text-center">{item.name || 'PDF'}</span>
+                                <DraggableItem key={index} x={50} y={50} s={1} onUpdate={()=>{}} isAdmin={true} className="relative aspect-[16/10]">
+                                    <div className="media-item group h-full w-full">
+                                        {mediaType === 'images' && <img src={item} alt="" className="w-full h-full object-cover" />}
+                                        {mediaType === 'videos' && (item.includes('youtube') || item.includes('vimeo') ? <iframe src={item} className="w-full h-full" /> : <video src={item} />)}
+                                        {mediaType === 'pdfs' && (
+                                            <div className="w-full h-full bg-slate-700 flex flex-col items-center justify-center">
+                                                <span className="text-4xl">📄</span>
+                                                <span className="text-xs text-slate-300 mt-2 px-2 truncate w-full text-center">{item.name || 'PDF'}</span>
+                                            </div>
+                                        )}
+                                        <div className="media-overlay">
+                                            <button className="media-btn bg-red-600 text-white" onClick={() => removeMedia(index)}>🗑️</button>
                                         </div>
-                                    )}
-                                    <div className="media-overlay">
-                                        <button className="media-btn bg-red-600 text-white" onClick={() => removeMedia(index)}>🗑️</button>
                                     </div>
-                                </div>
+                                </DraggableItem>
                             ))}
                         </div>
                         {mediaArray.length === 0 && <p className="text-center text-slate-500 py-10">No {mediaType} yet. Add some above!</p>}
@@ -1869,13 +2044,13 @@
         };
 
         const SocialLinkModal = ({ isOpen, onClose, data, setData, theme, editingLink }) => {
-            const [form, setForm] = useState({ label: '', url: '', icon: 'fa-brands fa-github' });
+            const [form, setForm] = useState({ label: '', url: '', icon: 'fa-brands fa-github', x: 50, y: 50, scale: 1, color: '#ffffff' });
             
             useEffect(() => {
                 if (editingLink) {
                     setForm({ ...editingLink });
                 } else {
-                    setForm({ label: '', url: '', icon: 'fa-brands fa-github' });
+                    setForm({ label: '', url: '', icon: 'fa-brands fa-github', x: 50, y: 50, scale: 1, color: '#ffffff' });
                 }
             }, [editingLink]);
 
@@ -1904,7 +2079,7 @@
                         <h2 className="text-xl font-bold mb-6 text-gradient">{editingLink ? 'Edit' : 'Add'} Social Link</h2>
                         <div className="space-y-4">
                             <div>
-                                <label className="text-xs text-slate-400 mb-1 block">Platform Name</label>
+                                <label className="text-xs text-slate-400 mb-1 block">Platform Name (Tooltip)</label>
                                 <input placeholder="e.g. LinkedIn" className="w-full bg-slate-800 border border-slate-600 rounded-xl p-3 text-white outline-none" value={form.label} onChange={e => setForm({...form, label: e.target.value})} />
                             </div>
                             <div>
@@ -1912,10 +2087,17 @@
                                 <input placeholder="https://..." className="w-full bg-slate-800 border border-slate-600 rounded-xl p-3 text-white outline-none" value={form.url} onChange={e => setForm({...form, url: e.target.value})} />
                             </div>
                             <div>
+                                <label className="text-xs text-slate-400 mb-1 block">Icon Color</label>
+                                <div className="flex items-center gap-2">
+                                    <input type="color" className="w-10 h-10 border-none bg-transparent cursor-pointer" value={form.color} onChange={e => setForm({...form, color: e.target.value})} />
+                                    <span className="text-xs text-slate-500">{form.color}</span>
+                                </div>
+                            </div>
+                            <div>
                                 <label className="text-xs text-slate-400 mb-1 block">FontAwesome Class</label>
                                 <div className="flex gap-2">
                                     <input placeholder="fa-brands fa-github" className="flex-1 bg-slate-800 border border-slate-600 rounded-xl p-3 text-white outline-none" value={form.icon} onChange={e => setForm({...form, icon: e.target.value})} />
-                                    <div className="w-12 flex items-center justify-center bg-slate-700 rounded-xl text-xl"><i className={form.icon}></i></div>
+                                    <div className="w-12 flex items-center justify-center bg-slate-700 rounded-xl text-xl"><i className={form.icon} style={{color: form.color}}></i></div>
                                 </div>
                                 <p className="text-[10px] text-slate-500 mt-1">Use 'fa-brands fa-...' for brands, 'fa-solid fa-...' for icons.</p>
                             </div>
@@ -1955,7 +2137,7 @@
             const handleAdd = () => {
                 if (type === 'experience') {
                     if (!form.role || !form.company) return showToast('Fill required fields!', 'error');
-                    const newItem = { id: Date.now(), ...form, highlights: [] };
+                    const newItem = { id: Date.now(), ...form, highlights: [], gallery: [] };
                     const newData = { ...data, experience: [...data.experience, newItem] };
                     setData(newData);
                     localStorage.setItem('portfolioData', JSON.stringify(newData));
@@ -2125,7 +2307,7 @@
                             </div>
                         </div>
                     </div>
-                    {mediaManager.open && <MediaManagerModal isOpen onClose={() => setMediaManager({ open: false })} projectId={p.id} mediaType={mediaManager.type} data={data} setData={setData} theme={theme} />}
+                    {mediaManager.open && <MediaManagerModal isOpen onClose={() => setMediaManager({ open: false })} targetId={p.id} targetType="project" mediaType={mediaManager.type} data={data} setData={setData} theme={theme} />}
                 </div>
             );
         };
@@ -2341,14 +2523,12 @@
             
             const DEFAULT_THEME = { 
                 primaryColor: '#06b6d4', secondaryColor: '#a855f7', animationSpeed: 1, glowIntensity: 1, spaceEffects: true, cursorTrail: true,
-                // SATURN ASSET CONFIG
                 pBase: "#050505", pGlow: "#001133", pRough: 0.2, pMetal: 0.8,
                 r1Col: "#ff0055", r2Col: "#00f0ff", r3Col: "#ccff00", rThick: 0.1, rMetal: 0.9, rRough: 0.1,
                 gyroPattern: true, stars: true, ast: true, shoot: true, nebula: true, nebColor: "#1a0033", 
                 neutron: false, neptune: false, neptuneColA: "#0a1a3a", neptuneColB: "#0044aa",
                 lightning: false, lightningColA: "#00f0ff", lightningColB: "#ffffff", lightningIntensity: 1.2,
                 rotSpeed: 1.0,
-                // FLUID CONFIG
                 fluidEnabled: true, fluidRes: 128, fluidDissipation: 1.0, fluidForce: 6000, fluidRadius: 40, fluidSpeed: 1.0, fluidColorA: "#00f0ff", fluidColorB: "#ff0055"
             };
 
@@ -2365,16 +2545,17 @@
             const [selectedProject, setSelectedProject] = useState(null);
             const [visibleProjects, setVisibleProjects] = useState(6);
             const [mobileMenu, setMobileMenu] = useState(false);
-            
+            const [galleryView, setGalleryView] = useState({ open: false, experienceId: null });
+
             // Modals
             const [editModal, setEditModal] = useState({ open: false });
             const [profileModal, setProfileModal] = useState(false);
             const [cvModal, setCvModal] = useState(false);
             const [addModal, setAddModal] = useState({ open: false, type: null });
             const [addSkillModal, setAddSkillModal] = useState(false);
-            const [socialModal, setSocialModal] = useState({ open: false, editItem: null }); // NEW
+            const [socialModal, setSocialModal] = useState({ open: false, editItem: null });
             const [newSkill, setNewSkill] = useState('');
-            const [mediaManager, setMediaManager] = useState({ open: false, projectId: null, type: null });
+            const [mediaManager, setMediaManager] = useState({ open: false, targetId: null, targetType: null, type: null });
 
             const adminMode = isAdmin && viewMode === 'admin';
 
@@ -2408,8 +2589,15 @@
                 const handleHover = (e) => {
                     const isInteractive = e.target.closest('a, button, .editable-highlight, input, textarea, .media-editable, [role="button"]');
                     const isTextInput = e.target.closest('input[type="text"], input[type="email"], input[type="password"], textarea');
-                    outline.classList.toggle('hover', !!isInteractive && !isTextInput);
-                    outline.classList.toggle('text-hover', !!isTextInput);
+                    const isResizer = e.target.classList.contains('resize-handle');
+
+                    if (isResizer) {
+                        outline.classList.add('resize-cursor');
+                    } else {
+                        outline.classList.remove('resize-cursor');
+                        outline.classList.toggle('hover', !!isInteractive && !isTextInput);
+                        outline.classList.toggle('text-hover', !!isTextInput);
+                    }
                 };
 
                 const handleClick = (e) => {
@@ -2475,6 +2663,13 @@
                 setData(newData);
                 localStorage.setItem('portfolioData', JSON.stringify(newData));
                 showToast('Deleted!', 'info');
+            };
+
+            const updateSocialPosition = (id, x, y, scale) => {
+                const newLinks = data.socialLinks.map(l => l.id === id ? { ...l, x, y, scale } : l);
+                const newData = { ...data, socialLinks: newLinks };
+                setData(newData);
+                localStorage.setItem('portfolioData', JSON.stringify(newData));
             };
 
             const exportData = () => {
@@ -2605,7 +2800,9 @@
                         {cvModal && <CVModal isOpen onClose={() => setCvModal(false)} data={data} setData={setData} theme={theme} />}
                         {addModal.open && <AddItemModal type={addModal.type} isOpen onClose={() => setAddModal({ open: false })} data={data} setData={setData} theme={theme} />}
                         {selectedProject && <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} isAdmin={adminMode} theme={theme} data={data} setData={setData} openEdit={openEdit} />}
-                        {mediaManager.open && <MediaManagerModal isOpen onClose={() => setMediaManager({ open: false })} projectId={mediaManager.projectId} mediaType={mediaManager.type} data={data} setData={setData} theme={theme} />}
+                        
+                        {/* Unified Media Manager for Projects and Experience Gallery */}
+                        {mediaManager.open && <MediaManagerModal isOpen onClose={() => setMediaManager({ open: false })} targetId={mediaManager.targetId} targetType={mediaManager.targetType} mediaType={mediaManager.type} data={data} setData={setData} theme={theme} />}
 
                         {/* Add Skill Modal */}
                         {addSkillModal && (
@@ -2661,7 +2858,7 @@
                                         <div className="flex gap-4">
                                             {data.socialLinks?.map(link => (
                                                 <a key={link.id} href={link.url} target="_blank" className="social-link" title={link.label}>
-                                                    <i className={link.icon}></i>
+                                                    <i className={link.icon} style={{ color: link.color || 'white' }}></i>
                                                 </a>
                                             ))}
                                         </div>
@@ -2716,12 +2913,54 @@
                                                 </p>
 
                                                 {job.highlights?.length > 0 && (
-                                                    <div className="flex flex-wrap gap-2">
+                                                    <div className="flex flex-wrap gap-2 mb-4">
                                                         {job.highlights.map((h, i) => (
                                                             <span key={i} className="skill-tag text-xs px-3 py-1 rounded-full">{h}</span>
                                                         ))}
                                                     </div>
                                                 )}
+
+                                                {/* EXPERIENCE VIEW MORE SECTION */}
+                                                <div className="mt-6 pt-4 border-t border-slate-700/50">
+                                                    {galleryView.open && galleryView.experienceId === job.id ? (
+                                                        <div className="animate-fade-in">
+                                                            <div className="flex justify-between items-center mb-4">
+                                                                <h4 className="font-bold text-sm text-slate-300">Project Highlights</h4>
+                                                                <div className="flex gap-2">
+                                                                    {adminMode && (
+                                                                        <button 
+                                                                            onClick={() => setMediaManager({ open: true, targetId: job.id, targetType: 'experience', type: 'images' })} 
+                                                                            className="text-xs px-3 py-1 rounded bg-blue-600/30 text-blue-300 hover:bg-blue-600/50"
+                                                                        >
+                                                                            + Manage
+                                                                        </button>
+                                                                    )}
+                                                                    <button onClick={() => setGalleryView({ open: false, experienceId: null })} className="text-xs text-slate-400 hover:text-white">Close</button>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            {job.gallery && job.gallery.length > 0 ? (
+                                                                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                                                    {job.gallery.map((img, i) => (
+                                                                        <div key={i} className="relative aspect-video rounded-lg overflow-hidden border border-slate-700 group/img">
+                                                                            <img src={img} alt="" className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-110" />
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            ) : (
+                                                                <p className="text-sm text-slate-500 italic text-center py-4">No gallery images added yet.</p>
+                                                            )}
+                                                        </div>
+                                                    ) : (
+                                                        <button 
+                                                            onClick={() => setGalleryView({ open: true, experienceId: job.id })}
+                                                            className="text-sm font-semibold flex items-center gap-2 hover:gap-3 transition-all"
+                                                            style={{ color: theme.primaryColor }}
+                                                        >
+                                                            View More {job.gallery?.length > 0 && `(${job.gallery.length})`} <span>→</span>
+                                                        </button>
+                                                    )}
+                                                </div>
                                             </div>
                                         ))}
 
@@ -2769,7 +3008,7 @@
                                     <div className="projects-grid max-w-7xl mx-auto">
                                         {data.projects?.slice(0, visibleProjects).map(project => (
                                             <ProjectCard key={project.id} project={project} onClick={() => setSelectedProject(project)} isAdmin={adminMode} theme={theme}
-                                                onManageImages={() => setMediaManager({ open: true, projectId: project.id, type: 'images' })}
+                                                onManageImages={() => setMediaManager({ open: true, targetId: project.id, targetType: 'project', type: 'images' })}
                                                 onDelete={() => deleteItem('project', project.id)} />
                                         ))}
                                     </div>
@@ -2790,7 +3029,7 @@
                                 </div>
                             </section>
 
-                            {/* Contact with Planet Effect - UPDATED SECTION */}
+                            {/* Contact with Planet Effect & Social Canvas */}
                             <section id="contact" className="py-24 relative flex items-center justify-center">
                                 <div className="container mx-auto px-6 max-w-7xl">
                                     <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -2844,31 +3083,57 @@
                                                 <button type="submit" className="btn-electric w-full py-4 rounded-xl font-bold text-white text-lg shadow-lg">Send Message 🚀</button>
                                             </form>
 
+                                            {/* FREE CANVAS SOCIAL MEDIA MANAGER */}
                                             <div className="mt-8 pt-8 border-t border-slate-700">
-                                                <div className="flex flex-wrap gap-4 justify-center items-center">
-                                                    {data.socialLinks?.map(link => (
-                                                        <div key={link.id} className="relative group">
-                                                            <a href={link.url} target="_blank" className="social-icon-btn w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-xl text-slate-400 hover:bg-slate-700 transition-all">
-                                                                <i className={link.icon}></i>
-                                                            </a>
-                                                            {adminMode && (
-                                                                <>
-                                                                    <div className="icon-edit-overlay bg-blue-500" style={{ right: 15 }} onClick={(e) => { e.preventDefault(); setSocialModal({ open: true, editItem: link }); }}>✎</div>
-                                                                    <div className="icon-edit-overlay bg-red-500" onClick={(e) => { e.preventDefault(); deleteSocial(link.id); }}>×</div>
-                                                                </>
-                                                            )}
-                                                        </div>
-                                                    ))}
-                                                    
+                                                <div className="flex justify-between items-center mb-4">
+                                                    <h4 className="text-sm text-slate-400 uppercase font-bold tracking-wider">Connect with me</h4>
                                                     {adminMode && (
-                                                        <button onClick={() => setSocialModal({ open: true, editItem: null })} className="social-icon-btn w-12 h-12 rounded-full border-2 border-dashed border-slate-600 flex items-center justify-center text-xl text-slate-400 hover:border-cyan-500 hover:text-cyan-500 transition-all">
-                                                            +
+                                                        <button 
+                                                            onClick={() => setSocialModal({ open: true, editItem: null })} 
+                                                            className="text-xs bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded-full transition-colors"
+                                                        >
+                                                            + Add Icon
                                                         </button>
+                                                    )}
+                                                </div>
+                                                
+                                                <div className={`draggable-canvas-container ${adminMode ? 'border-dashed border-2 border-slate-600' : 'border-none bg-transparent'}`}>
+                                                    {data.socialLinks?.map(link => (
+                                                        <DraggableItem
+                                                            key={link.id}
+                                                            x={link.x}
+                                                            y={link.y}
+                                                            s={link.scale || 1}
+                                                            onUpdate={(x, y, s) => updateSocialPosition(link.id, x, y, s)}
+                                                            isAdmin={adminMode}
+                                                            tooltip={link.label}
+                                                        >
+                                                            <div className="relative group/icon">
+                                                                <a 
+                                                                    href={link.url} 
+                                                                    target="_blank" 
+                                                                    className={`social-icon-btn w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-xl transition-all shadow-lg border border-slate-700`}
+                                                                    style={{ color: link.color || theme.primaryColor }}
+                                                                >
+                                                                    <i className={link.icon}></i>
+                                                                </a>
+                                                                {adminMode && (
+                                                                    <>
+                                                                        <div className="icon-edit-overlay bg-blue-500" style={{ right: 35 }} onClick={(e) => { e.preventDefault(); e.stopPropagation(); setSocialModal({ open: true, editItem: link }); }}>✎</div>
+                                                                        <div className="icon-edit-overlay bg-red-500" onClick={(e) => { e.preventDefault(); e.stopPropagation(); deleteSocial(link.id); }}>×</div>
+                                                                    </>
+                                                                )}
+                                                            </div>
+                                                        </DraggableItem>
+                                                    ))}
+                                                    {adminMode && data.socialLinks?.length === 0 && (
+                                                        <div className="absolute inset-0 flex items-center justify-center text-slate-500 pointer-events-none">
+                                                            Drag & Drop Canvas Area (Empty)
+                                                        </div>
                                                     )}
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </section>
