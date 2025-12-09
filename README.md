@@ -4,7 +4,7 @@
 
 <img width="1635" height="853" alt="Screenshot 2025-12-05 124225" src="https://github.com/user-attachments/assets/d2cdc69f-f1b5-4fe4-864e-2a49f855b682" />
 
-🔗 Live Demonstration of my Portfolio: https://github.com/J-Abid
+🔗 Live Demonstration of my Portfolio: https://mjabid.work.gd/
 
 Public-Portfolio is a sophisticated, single-file web architecture that pushes the boundaries of client-side rendering. By integrating React, Three.js, and a custom WebGL Fluid Simulation engine directly into the browser via Babel Standalone, this project delivers an immersive, zero-dependency portfolio solution that requires no build steps or backend servers.
 Designed for high-impact visual storytelling, it features a proprietary Content Management System (CMS) built entirely in JavaScript. This system allows the site owner to securely modify content, visual themes, and layout structures in real-time through a private, password-protected interface.
